@@ -12,13 +12,15 @@ export class HttpTestComponent implements OnInit {
   someData:string = 'hello';
   imageFolder:string = 'http://media.mw.metropolia.fi/wbma/uploads/'
   imgUrl:string = 'http://placekitten.com/200/300';
+  mediaArray: any;
 
   constructor(private http:HttpClient) { }
 
   getJSON(){
     this.http.get('assets/package.json').subscribe( data => {
       console.log(data);
-      this.someData = data.license;
+      //this.someData = data['license'];
+      this.someData = data['license'];
     } )    
   }
 
@@ -26,7 +28,8 @@ export class HttpTestComponent implements OnInit {
     this.http.get('http://media.mw.metropolia.fi/wbma/media').subscribe (data1 =>{
       console.log(data1);
       console.log(data1[0].filename);
-      this.imgUrl = 'http://media.mw.metropolia.fi/wbma/uploads/' + data1[0].filename;
+      //this.imgUrl = 'http://media.mw.metropolia.fi/wbma/uploads/' + data1[0].filename;
+      this.mediaArray = data1 ;
     })
   }
 
